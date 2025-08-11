@@ -14,5 +14,12 @@
 
 
 
+/* Includes
+ * ------------------------------------------------------------------*/
+#include "adc_defines_includes_general_functions.h"
+
+
 /* Function Prototypes
  * ------------------------------------------------------------------*/
+
+void adc_init();

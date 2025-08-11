@@ -13,5 +13,11 @@
 #endif /* INC_ADC_PROCESSING_H_ */
 
 
+/* Includes
+ * ------------------------------------------------------------------*/
+#include "adc_defines_includes_general_functions.h"
+
+
+
 /* Function Prototypes
  * ------------------------------------------------------------------*/
