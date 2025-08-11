@@ -106,8 +106,9 @@ int main(void)
 #endif
   while (1)
   {
-	  testing_J8_CS1();
-	  HAL_Delay(100);
+
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

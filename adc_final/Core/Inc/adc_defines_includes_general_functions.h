@@ -104,6 +104,15 @@ extern UART_HandleTypeDef huart1;
 #define IRQ2			IRQ2_EXTI_Pin
 
 
+/* Sensor individual values (For testing and applying)
+ * ----------------------------------*/
+#define J7				0x1
+#define J8				0x2
+#define J10				0x3
+#define J12				0x4
+#define J13				0x5
+#define J14				0x6
+
 
 
 /* Function Prototypes

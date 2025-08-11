@@ -23,7 +23,8 @@
 /* Function prototypes
  * ------------------------------------------------------------------*/
 
+// Testing the sensor J7 at ADC U3 (CS1)
+uint16_t testing_Jx(uint8_t Jx);
 
 
-// Testing the sensor J8 at ADC U3 (CS1)
-void testing_J8_CS1();
+void record_all_Jx_values();
