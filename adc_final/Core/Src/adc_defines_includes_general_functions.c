@@ -136,7 +136,7 @@ uint8_t send_COMMANDBYTE_code_receive_STATUSBYTE(uint16_t chipselect, uint8_t co
 
 void send_COMMANDBYTE_fast_cmd_adc_conv_start(uint16_t chipselect)
 {
-	send_COMMANDBYTE_code(chipselect, ADC_CONV_START_CODE);
+	send_COMMANDBYTE_code(chipselect, FC_ADC_CONV_START);
 	set_pin(chipselect, HIGH);		// End the SPI communication if it was a fast command
 	HAL_Delay(1);		// For the conversion time Tconv of about 300 to 400ns
 }
@@ -144,7 +144,7 @@ void send_COMMANDBYTE_fast_cmd_adc_conv_start(uint16_t chipselect)
 uint8_t send_COMMANDBYTE_fast_cmd_adc_conv_start_receive_STATUSBYTE(uint16_t chipselect)
 {
 	uint8_t STATUSBYTE = 0;
-	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, ADC_CONV_START_CODE);
+	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FC_ADC_CONV_START);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 	return STATUSBYTE;
 }
@@ -152,14 +152,14 @@ uint8_t send_COMMANDBYTE_fast_cmd_adc_conv_start_receive_STATUSBYTE(uint16_t chi
 
 void send_COMMANDBYTE_fast_cmd_adc_standby(uint16_t chipselect)
 {
-	send_COMMANDBYTE_code(chipselect, ADC_STANDBY_CODE);
+	send_COMMANDBYTE_code(chipselect, FC_ADC_STANDBY);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 }
 
 uint8_t send_COMMANDBYTE_fast_cmd_adc_standby_receive_STATUSBYTE(uint16_t chipselect)
 {
 	uint8_t STATUSBYTE = 0;
-	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, ADC_STANDBY_CODE);
+	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FC_ADC_STANDBY);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 	return STATUSBYTE;
 }
@@ -167,14 +167,14 @@ uint8_t send_COMMANDBYTE_fast_cmd_adc_standby_receive_STATUSBYTE(uint16_t chipse
 
 void send_COMMANDBYTE_fast_cmd_adc_shutdown(uint16_t chipselect)
 {
-	send_COMMANDBYTE_code(chipselect, ADC_SHUTDOWN_CODE);
+	send_COMMANDBYTE_code(chipselect, FC_ADC_SHUTDOWN);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 }
 
 uint8_t send_COMMANDBYTE_fast_cmd_adc_shutdown_receive_STATUSBYTE(uint16_t chipselect)
 {
 	uint8_t STATUSBYTE = 0;
-	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, ADC_SHUTDOWN_CODE);
+	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FC_ADC_SHUTDOWN);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 	return STATUSBYTE;
 }
@@ -183,14 +183,14 @@ uint8_t send_COMMANDBYTE_fast_cmd_adc_shutdown_receive_STATUSBYTE(uint16_t chips
 
 void send_COMMANDBYTE_fast_cmd_full_shutdown(uint16_t chipselect)
 {
-	send_COMMANDBYTE_code(chipselect, FULL_SHUTDOWN_CODE);
+	send_COMMANDBYTE_code(chipselect, FC_FULL_SHUTDOWN);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 }
 
 uint8_t send_COMMANDBYTE_fast_cmd_full_shutdown_receive_STATUSBYTE(uint16_t chipselect)
 {
 	uint8_t STATUSBYTE = 0;
-	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FULL_SHUTDOWN_CODE);
+	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FC_FULL_SHUTDOWN);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 	return STATUSBYTE;
 }
@@ -199,14 +199,14 @@ uint8_t send_COMMANDBYTE_fast_cmd_full_shutdown_receive_STATUSBYTE(uint16_t chip
 
 void send_COMMANDBYTE_fast_cmd_full_reset(uint16_t chipselect)
 {
-	send_COMMANDBYTE_code(chipselect, FULL_RESET_CODE);
+	send_COMMANDBYTE_code(chipselect, FC_FULL_RESET);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 }
 
 uint8_t send_COMMANDBYTE_fast_cmd_full_reset_receive_STATUSBYTE(uint16_t chipselect)
 {
 	uint8_t STATUSBYTE = 0;
-	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FULL_RESET_CODE);
+	STATUSBYTE = send_COMMANDBYTE_code_receive_STATUSBYTE(chipselect, FC_FULL_RESET);
 	set_pin(chipselect, HIGH);		// End the SPI communication
 	return STATUSBYTE;
 }

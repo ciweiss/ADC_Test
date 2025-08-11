@@ -101,6 +101,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+#if 0
+  // Marking the part of main while
+#endif
   while (1)
   {
 	  testing_J8_CS1();
