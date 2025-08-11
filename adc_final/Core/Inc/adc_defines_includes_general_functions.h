@@ -62,7 +62,7 @@ extern UART_HandleTypeDef huart1;
 // Initialising
 #define INITIAL_CONFIG0_CODE					0b11100000		// Writing Config0 register with CLK_SEL = 0b10 (Internal CLK)
 
-// Fast Commands
+// Fast Commands complete bitcodes as COMMANDBYTE
 #define FC_ADC_CONV_START				(DEV_ADDR << 6) | (ADC_CONV_START_CODE << 2) | FAST_COMM	// COMMANDBYTE bitcode for fast command conversion start/restart
 #define FC_ADC_STANDBY					(DEV_ADDR << 6) | (ADC_STANDBY_CODE << 2) | FAST_COMM
 #define FC_ADC_SHUTDOWN					(DEV_ADDR << 6) | (ADC_SHUTDOWN_CODE << 2) | FAST_COMM

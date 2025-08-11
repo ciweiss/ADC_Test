@@ -23,8 +23,6 @@
 /* Function prototypes
  * ------------------------------------------------------------------*/
 
-// Testing the sensor J7 at ADC U3 (CS1)
-void testing_J7_CS1();
 
 
 // Testing the sensor J8 at ADC U3 (CS1)
