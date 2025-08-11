@@ -112,7 +112,7 @@ extern UART_HandleTypeDef huart1;
 
 /* HAL internal functions
  * ----------------------------------*/
-void set_pin(uint8_t pin, GPIO_PinState state);
+void set_pin(uint16_t pin, GPIO_PinState state);
 
 
 /* Send/Receive Data

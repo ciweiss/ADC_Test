@@ -17,9 +17,15 @@
 
 /* HAL internal functions
  * ----------------------------------*/
-void set_pin(uint8_t pin, GPIO_PinState state)
+void set_pin(uint16_t pin, GPIO_PinState state)
 {
-	pin = state;
+	if(pin == CS1)
+	{
+		HAL_GPIO_WritePin(CS1_GPIO_Port, CS1_Pin, state);
+	}else
+	{
+		HAL_GPIO_WritePin(CS2_GPIO_Port, CS1_Pin, state);
+	}
 }
 
 
@@ -131,7 +137,8 @@ uint8_t send_COMMANDBYTE_code_receive_STATUSBYTE(uint16_t chipselect, uint8_t co
 void send_COMMANDBYTE_fast_cmd_adc_conv_start(uint16_t chipselect)
 {
 	send_COMMANDBYTE_code(chipselect, ADC_CONV_START_CODE);
-	set_pin(chipselect, HIGH);		// End the SPI communication
+	set_pin(chipselect, HIGH);		// End the SPI communication if it was a fast command
+	HAL_Delay(1);		// For the conversion time Tconv of about 300 to 400ns
 }
 
 uint8_t send_COMMANDBYTE_fast_cmd_adc_conv_start_receive_STATUSBYTE(uint16_t chipselect)
