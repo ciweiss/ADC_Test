@@ -25,7 +25,7 @@ uint16_t chipselect = 0;										// Chipselect, needed for some functions
 
 
 // This should be outputted at beginning (raw and voltage values will be outputted at suitable positions)
-char standard_output_list[500] = "\r\n\n\n\n\n\n__________________\r\n\nSensor: J7\r\nRaw value: \r\nVoltage value: \r\n________\n\r\nSensor: J8\r\nRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J10\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J12\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J13\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J14\n\rRaw value: \n\rVoltage value: \n\r__________________";
+char standard_output_list[500] = "\033[2J\033[H__________________\r\n\nSensor: J7\r\nRaw value: \r\nVoltage value: \r\n________\n\r\nSensor: J8\r\nRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J10\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J12\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J13\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J14\n\rRaw value: \n\rVoltage value: \n\r__________________";
 /*
  * Has following structure
 	    __________________
@@ -59,22 +59,22 @@ char standard_output_list[500] = "\r\n\n\n\n\n\n__________________\r\n\nSensor: 
 
 // Cursor-Positions for Raw Values
 const char *cursor_raw[] = {
-    "\033[3;13H",   // J7
-    "\033[7;13H",   // J8
-    "\033[11;13H",  // J10
-    "\033[15;13H",  // J12
-    "\033[19;13H",  // J13
-    "\033[23;13H"   // J14
+    "\033[4;16H",   // J7
+    "\033[9;16H",   // J8
+    "\033[14;16H",  // J10
+    "\033[15;16H",  // J12
+    "\033[21;16H",  // J13
+    "\033[26;16H"   // J14
 };
 
 // Cursor-Positions for Voltage Values
 const char *cursor_volt[] = {
-    "\033[4;16H",   // J7
-    "\033[8;16H",   // J8
-    "\033[12;16H",  // J10
-    "\033[16;16H",  // J12
+    "\033[5;16H",   // J7
+    "\033[10;16H",   // J8
+    "\033[15;16H",  // J10
+    "\033[19;16H",  // J12
     "\033[20;16H",  // J13
-    "\033[24;16H"   // J14
+    "\033[27;16H"   // J14
 };
 
 const char turn_cursor_on[12] = "\033[?25h";
@@ -92,7 +92,7 @@ void uart_standard_list()
 	// Output the standard list without values
 	HAL_UART_Transmit(&huart1, (uint8_t*)standard_output_list, strlen(standard_output_list),HAL_MAX_DELAY);
 
-	// Turn curser off (Otherwise curser jumps with every value update)
+	// Turn curser off (Otherwise curser jumps with every value update around)
 	HAL_UART_Transmit(&huart1, (uint8_t*)turn_cursor_off, strlen(turn_cursor_off),HAL_MAX_DELAY);
 }
 
@@ -165,10 +165,10 @@ void uart_all_Jx_values()
 		adc_value_vol = adc_value_raw_Jx[jx-1] * factor;
 
 		// Output the results
-		sprintf(output, "%s%d\r\n", cursor_raw[jx-1], adc_value_raw_Jx[jx-1]);
+		sprintf(output, "%s%d", cursor_raw[jx-1], adc_value_raw_Jx[jx-1]);
 		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 
-		sprintf(output, "%s%f\r\n", cursor_volt[jx-1], adc_value_vol);
+		sprintf(output, "%s%f", cursor_volt[jx-1], adc_value_vol);
 		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 	}
 }
