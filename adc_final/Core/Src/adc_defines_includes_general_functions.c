@@ -24,7 +24,7 @@ void set_pin(uint16_t pin, GPIO_PinState state)
 		HAL_GPIO_WritePin(CS1_GPIO_Port, CS1_Pin, state);
 	}else
 	{
-		HAL_GPIO_WritePin(CS2_GPIO_Port, CS1_Pin, state);
+		HAL_GPIO_WritePin(CS2_GPIO_Port, CS2_Pin, state);
 	}
 }
 

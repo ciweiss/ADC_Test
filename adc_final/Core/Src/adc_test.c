@@ -101,6 +101,8 @@ void uart_standard_list()
 // Testing the sensor J8 at ADC U3 (CS1)
 uint16_t adc_conversion_and_feedback_Jx(uint8_t Jx)
 {
+	uint8_t reg_value = 0;
+
 	// Setting up chipselect and channel select
 	switch (Jx)
 	{
@@ -127,11 +129,25 @@ uint16_t adc_conversion_and_feedback_Jx(uint8_t Jx)
 	case J13:
 		set_channels_J13_CS2();
 		chipselect = CS2;
+
+/*
+		reg_value = read_adc_reg8(CS1, CONFIG0_ADDR);
+		sprintf(output, "\r\nCS1 CONFIG0_ADDR reg value: %02X\r\n", reg_value);
+		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+*/
+
 		break;
 
 	case J14:
 		set_channels_J14_CS2();
 		chipselect = CS2;
+
+/*
+		reg_value = read_adc_reg8(CS2, CONFIG0_ADDR);
+		sprintf(output, "\r\nCS2 CONFIG0_ADDR reg value: %02X\r\n", reg_value);
+		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+*/
+
 		break;
 	}
 

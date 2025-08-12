@@ -24,6 +24,9 @@
  * ------------------------------------------------------------------*/
 
 // Testing the sensor J7 at ADC U3 (CS1)
+
+void uart_standard_list();
+
 uint16_t adc_conversion_and_feedback_Jx(uint8_t Jx);
 
 
@@ -35,4 +38,4 @@ void uart_all_Jx_values();
 
 void adc_test_routine();
 
-void uart_standard_list();
+
