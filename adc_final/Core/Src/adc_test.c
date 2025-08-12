@@ -24,6 +24,39 @@ uint16_t chipselect = 0;
 int16_t adc_value_raw_Jx[6] = {0};
 
 
+char standard_output_list[500] = "\n\n\n__________________\r\n\nSensor: \nRaw value: \nVoltage value: \n________\n\nSensor: \nRaw value: 5\nVoltage value: 0.183105 mV\n________\n\nSensor: J10\nRaw value: -9\nVoltage value: -0.329590 mV\n________\n\nSensor: J12\nRaw value: 6\nVoltage value: 0.219727 mV\n________\n\nSensor: J13\nRaw value: -1\nVoltage value: -0.036621 mV\n________\n\nSensor: J14\nRaw value: -1\nVoltage value: -0.036621 mV\n__________________";
+/*
+ * Has following structure
+	__________________
+
+		Sensor: J7
+		Raw value: 1
+		Voltage value: 0.036621 mV
+		________
+		Sensor: J8
+		Raw value: 5
+		Voltage value: 0.183105 mV
+		________
+		Sensor: J10
+		Raw value: -9
+		Voltage value: -0.329590 mV
+		________
+		Sensor: J12
+		Raw value: 6
+		Voltage value: 0.219727 mV
+		________
+		Sensor: J13
+		Raw value: -1
+		Voltage value: -0.036621 mV
+		________
+		Sensor: J14
+		Raw value: -1
+		Voltage value: -0.036621 mV
+		__________________
+*/
+
+
+
 
 /* Function declarations
  * ------------------------------------------------------------------*/
@@ -86,6 +119,10 @@ void record_all_Jx_values()
 
 void uart_all_Jx_values()
 {
+	// Output the standard list without values
+	HAL_UART_Transmit(&huart1, (uint8_t*)standard_output_list, strlen(standard_output_list),HAL_MAX_DELAY);
+
+/*
 	for (int jx = 1; jx <= 6; jx++)
 	{
 
@@ -129,7 +166,7 @@ void uart_all_Jx_values()
 		if(jx == 1)
 		{
 			// Output the element
-			sprintf(output, "__________________\r\n\n");
+			sprintf(output, "\n\n\n\n\n\n__________________\r\n\n");
 			HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 		}
 
@@ -147,7 +184,7 @@ void uart_all_Jx_values()
 		sprintf(output, "Raw value: %d\r\n", adc_value_raw_Jx[jx-1]);
 		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 
-		sprintf(output, "Voltage value: %f mV\r\n\n\n", adc_value_vol);
+		sprintf(output, "Voltage value: %f mV\r\n", adc_value_vol);
 		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 
 
@@ -168,6 +205,7 @@ void uart_all_Jx_values()
 		adc_value_raw_Jx[jx-1] = adc_conversion_and_feedback_Jx(jx);
 		HAL_Delay(20);
 	}
+	*/
 }
 
 

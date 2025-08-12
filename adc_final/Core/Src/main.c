@@ -106,8 +106,8 @@ int main(void)
 #endif
   while (1)
   {
-
-
+	  adc_test_routine();
+	  HAL_Delay(500);
 
     /* USER CODE END WHILE */
 
