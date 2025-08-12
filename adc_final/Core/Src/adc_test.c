@@ -28,7 +28,7 @@ int16_t adc_value_raw_Jx[6] = {0};
 /* Function declarations
  * ------------------------------------------------------------------*/
 // Testing the sensor J8 at ADC U3 (CS1)
-uint16_t testing_Jx(uint8_t Jx)
+uint16_t adc_conversion_and_feedback_Jx(uint8_t Jx)
 {
 	// Setting up chipselect and channel select
 	switch (Jx)
@@ -77,25 +77,106 @@ uint16_t testing_Jx(uint8_t Jx)
 void record_all_Jx_values()
 {
 	for (int jx = 1; jx <= 6; jx++)
-		  {
-		      adc_value_raw_Jx[jx-1] = testing_Jx(jx);
-			  HAL_Delay(20);
-		  }
+	{
+		adc_value_raw_Jx[jx-1] = adc_conversion_and_feedback_Jx(jx);
+	}
+}
+
+
+
+void uart_all_Jx_values()
+{
+	for (int jx = 1; jx <= 6; jx++)
+	{
+
+
+		// Variables for output
+		const char *sensor_name = NULL;
+
+
+
+		// Determine the char
+		switch (jx)
+		{
+		case J7:
+			sensor_name = "J7";
+			break;
+
+		case J8:
+			sensor_name = "J8";
+			break;
+
+		case J10:
+			sensor_name = "J10";
+			break;
+
+		case J12:
+			sensor_name = "J12";
+			break;
+
+		case J13:
+			sensor_name = "J13";
+			break;
+
+		case J14:
+			sensor_name = "J14";
+			break;
+		}
+
+
+
+		// First case overview element (UI)
+		if(jx == 1)
+		{
+			// Output the element
+			sprintf(output, "__________________\r\n\n");
+			HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+		}
+
+
+
+		// Convert raw value to mV value
+		adc_value_vol = adc_value_raw_Jx[jx-1] * factor;
+
+
+
+		// Output the results
+		sprintf(output, "Sensor: %s\r\n", sensor_name);
+		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+
+		sprintf(output, "Raw value: %d\r\n", adc_value_raw_Jx[jx-1]);
+		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+
+		sprintf(output, "Voltage value: %f mV\r\n\n\n", adc_value_vol);
+		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+
+
+
+		// Last case overview element (UI)
+		if(jx == 6)
+		{
+			// Output the element
+			sprintf(output, "__________________\r\n");
+			HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+		}else
+		{
+			// Output the element
+			sprintf(output, "________\r\n");
+			HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
+		}
+
+		adc_value_raw_Jx[jx-1] = adc_conversion_and_feedback_Jx(jx);
+		HAL_Delay(20);
+	}
 }
 
 
 
 
 
-/*
-	// Convert raw value to mV value
-	adc_value_vol = adc_value_raw * factor;
-
-	// Output the results
-	sprintf(output, "Raw value: %d\r\n", adc_value_raw);
-	HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
-	sprintf(output, "Voltage value: %f mV\r\n\n\n", adc_value_vol);
-	HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
- */
-
+void adc_test_routine()
+{
+	record_all_Jx_values();
+	uart_all_Jx_values();
+}
 
