@@ -24,34 +24,34 @@ uint16_t chipselect = 0;
 int16_t adc_value_raw_Jx[6] = {0};
 
 
-char standard_output_list[500] = "\n\n\n__________________\r\n\nSensor: \nRaw value: \nVoltage value: \n________\n\nSensor: \nRaw value: 5\nVoltage value: 0.183105 mV\n________\n\nSensor: J10\nRaw value: -9\nVoltage value: -0.329590 mV\n________\n\nSensor: J12\nRaw value: 6\nVoltage value: 0.219727 mV\n________\n\nSensor: J13\nRaw value: -1\nVoltage value: -0.036621 mV\n________\n\nSensor: J14\nRaw value: -1\nVoltage value: -0.036621 mV\n__________________";
+char standard_output_list[500] = "\r\n\n\n\n\n\n__________________\r\n\nSensor: J7\r\nRaw value: \r\nVoltage value: \r\n________\n\r\nSensor: J8\r\nRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J10\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J12\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J13\n\rRaw value: \n\rVoltage value: \n\r________\n\r\nSensor: J14\n\rRaw value: \n\rVoltage value: \n\r__________________";
 /*
  * Has following structure
-	__________________
+	    __________________
 
 		Sensor: J7
-		Raw value: 1
-		Voltage value: 0.036621 mV
+		Raw value:
+		Voltage value:
 		________
 		Sensor: J8
-		Raw value: 5
-		Voltage value: 0.183105 mV
+		Raw value:
+		Voltage value:
 		________
 		Sensor: J10
-		Raw value: -9
-		Voltage value: -0.329590 mV
+		Raw value:
+		Voltage value:
 		________
 		Sensor: J12
-		Raw value: 6
-		Voltage value: 0.219727 mV
+		Raw value:
+		Voltage value:
 		________
 		Sensor: J13
-		Raw value: -1
-		Voltage value: -0.036621 mV
+		Raw value:
+		Voltage value:
 		________
 		Sensor: J14
-		Raw value: -1
-		Voltage value: -0.036621 mV
+		Raw value:
+		Voltage value:
 		__________________
 */
 
@@ -60,6 +60,14 @@ char standard_output_list[500] = "\n\n\n__________________\r\n\nSensor: \nRaw va
 
 /* Function declarations
  * ------------------------------------------------------------------*/
+
+void uart_standard_list()
+{
+	// Output the standard list without values
+	HAL_UART_Transmit(&huart1, (uint8_t*)standard_output_list, strlen(standard_output_list),HAL_MAX_DELAY);
+}
+
+
 // Testing the sensor J8 at ADC U3 (CS1)
 uint16_t adc_conversion_and_feedback_Jx(uint8_t Jx)
 {
@@ -119,10 +127,8 @@ void record_all_Jx_values()
 
 void uart_all_Jx_values()
 {
-	// Output the standard list without values
-	HAL_UART_Transmit(&huart1, (uint8_t*)standard_output_list, strlen(standard_output_list),HAL_MAX_DELAY);
 
-/*
+
 	for (int jx = 1; jx <= 6; jx++)
 	{
 
@@ -205,7 +211,6 @@ void uart_all_Jx_values()
 		adc_value_raw_Jx[jx-1] = adc_conversion_and_feedback_Jx(jx);
 		HAL_Delay(20);
 	}
-	*/
 }
 
 

@@ -97,6 +97,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   adc_init();
+  uart_standard_list();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,8 +107,10 @@ int main(void)
 #endif
   while (1)
   {
+	  /*
 	  adc_test_routine();
 	  HAL_Delay(500);
+	  */
 
     /* USER CODE END WHILE */
 

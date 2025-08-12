@@ -34,3 +34,5 @@ void uart_all_Jx_values();
 
 
 void adc_test_routine();
+
+void uart_standard_list();
