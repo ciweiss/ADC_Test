@@ -86,9 +86,11 @@ extern UART_HandleTypeDef huart1;
 
 /* ADC properties/Math stuff defines
  * ----------------------------------*/
-#define VREF 		2400
-#define RESOLUTION	16
-
+#define VREF 					2400.0f
+#define RESOLUTION				16							// 16 bits data output, but it is 2´s complement! So you only have only 15 bits of absolute value (without sign)
+#define ABSOLUTE_RESOLUTION		(RESOLUTION-1)				// Better use this for calculating absolute values
+#define DIVIDER					(1 << ABSOLUTE_RESOLUTION)	// Equal to 2^ABSOLUTE_RESOLUTION (for e.g. 2^15 = 32768)
+#define FACTOR					VREF / (float)DIVIDER				// One digital step in mV, this multiplied with the Raw ADC digital output data equals the recent value in mV
 
 /* HAL Internal
  * ----------------------------------*/

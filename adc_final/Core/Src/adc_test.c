@@ -18,7 +18,6 @@
  * ------------------------------------------------------------------*/
 int16_t adc_value_raw = 0;										// For reading raw adc value at once
 int16_t adc_value_raw_Jx[6] = {0};								// For saving every adc sensor value in an array
-const float factor = (float)VREF / (float)(1<<RESOLUTION);		// Factor for calculating the raw value to voltage value, the divider is equal to 2 to power of RESOLUTION
 float adc_value_vol = 0;										// Voltage value in mV
 char output[100];												// Just an output string
 uint16_t chipselect = 0;										// Chipselect, needed for some functions
@@ -101,7 +100,6 @@ void uart_standard_list()
 // Testing the sensor J8 at ADC U3 (CS1)
 uint16_t adc_conversion_and_feedback_Jx(uint8_t Jx)
 {
-	uint8_t reg_value = 0;
 
 	// Setting up chipselect and channel select
 	switch (Jx)
@@ -169,8 +167,6 @@ void record_all_Jx_values()
 	}
 }
 
-
-
 void uart_all_Jx_values()
 {
 
@@ -179,13 +175,13 @@ void uart_all_Jx_values()
 	{
 
 		// Convert raw value to mV value
-		adc_value_vol = adc_value_raw_Jx[jx-1] * factor;
+		adc_value_vol = adc_value_raw_Jx[jx-1] * FACTOR;
 
 		// Output the results
 		sprintf(output, "%s%d", cursor_raw[jx-1], adc_value_raw_Jx[jx-1]);
 		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 
-		sprintf(output, "%s%f", cursor_volt[jx-1], adc_value_vol);
+		sprintf(output, "%s%f mV", cursor_volt[jx-1], adc_value_vol);
 		HAL_UART_Transmit(&huart1, (uint8_t*)output, strlen(output),HAL_MAX_DELAY);
 	}
 }
